@@ -1,0 +1,24 @@
+docker run -d \
+  --name "shelf" \
+  -e "DATABASE_URL=postgres://postgres.xxvqnxbsarqbawyprayi:p1l1cnJHpr6y2Pi0@aws-0-us-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true" \
+  -e "DIRECT_URL=postgres://postgres.xxvqnxbsarqbawyprayi:p1l1cnJHpr6y2Pi0@aws-0-us-west-1.pooler.supabase.com:5432/postgres" \
+  -e 'SUPABASE_ANON_PUBLIC=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4dnFueGJzYXJxYmF3eXByYXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI0MjAyODUsImV4cCI6MjAyNzk5NjI4NX0.vSERkuxm-hMaR3Vc-IcnXEDF66kWb4yGuqq-xrEJgJE' \
+  -e 'SUPABASE_SERVICE_ROLE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh4dnFueGJzYXJxYmF3eXByYXlpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxMjQyMDI4NSwiZXhwIjoyMDI3OTk2Mjg1fQ.14u8KKBAgt8fIcdeALP8uhApvEgLN0VAOGw5IjeN5NU' \
+  -e 'SUPABASE_URL=https://xxvqnxbsarqbawyprayi.supabase.co' \
+  -e 'SESSION_SECRET=a93fb5c31facbce1383356e6e60df713' \
+  -e 'SERVER_URL=http://localhost:3000' \
+  -e 'MAPTILER_TOKEN=maptiler-token' \
+  -e 'SMTP_HOST=smtp.gmail.com' \
+  -e 'SMTP_PORT=465' \
+  -e 'SMTP_USER=admin@subletinn.com' \
+  -e 'SMTP_FROM="Carlos from shelf.nu" <admin@subletinn.com>' \
+  -e 'SMTP_PWD=llqy llyq crue xgps' \
+  -e 'INVITE_TOKEN_SECRET=14023bba4a973f96ed3653147018fa9f' \
+  -p 3000:8080 \
+  --restart unless-stopped \
+  ghcr.io/shelf-nu/shelf.nu:latest
+
+docker buildx build \
+   --platform linux/amd64,linux/arm64 \
+   --tag shelf-local \
+   --file Dockerfile.image .
