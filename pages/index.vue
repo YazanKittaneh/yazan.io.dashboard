@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { Activity, ArrowUpRight, CreditCard, DollarSign, Users } from 'lucide-vue-next'
 
-
+const downloadPDF = () => {
+  // Replace 'path/to/your/file.pdf' with the actual path to your PDF file
+  const pdfUrl = 'resume.pdf'
+  window.open(pdfUrl, '_blank')
+}
 
 </script>
 
@@ -12,8 +16,7 @@ import { Activity, ArrowUpRight, CreditCard, DollarSign, Users } from 'lucide-vu
         Yazan's Dash
       </h2>
       <div class="flex items-center space-x-2">
-        <BaseDateRangePicker />
-        <Button>Download</Button>
+        <Button @click="downloadPDF">Download</Button>
       </div>
     </div>
     <main class="flex flex-1 flex-col gap-4 md:gap-8">

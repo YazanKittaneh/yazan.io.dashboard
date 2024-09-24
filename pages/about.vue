@@ -62,6 +62,7 @@ const jobs = [
                 </CardContent>
             </Card>
         </div>
+        <!--V  Speific Projects V-->
         <div class="col-span-2 grid items-start gap-6 lg:col-span-">
             <Card :class="cn('w-[380px]', $attrs.class ?? '')">
                 <CardHeader>
