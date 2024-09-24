@@ -13,7 +13,9 @@
     "format": "eslint --fix ."
   },
   "dependencies": {
+    "@iconify-json/radix-icons": "^1.2.0",
     "@internationalized/date": "^3.5.4",
+    "@radix-icons/vue": "^1.0.0",
     "@unovis/ts": "^1.4.1",
     "@unovis/vue": "^1.4.1",
     "embla-carousel": "^8.1.3",
