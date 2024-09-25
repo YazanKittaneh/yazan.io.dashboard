@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Search } from 'lucide-vue-next'
 import { ConfigProvider } from 'radix-vue'
-import type { Blog } from './data/blogs'
+import { blog, type Blog } from './data/blogs'
 import { cn } from '~/lib/utils'
 import type { LinkProp } from '~/components/mail/Nav.vue'
 
@@ -35,14 +35,14 @@ const filteredBlogList = computed(() => {
   if (!searchValue) {
     output = props.blogs
   }
-
   else {
     output = props.blogs.filter((item) => {
       return item.name.includes(debouncedSearch.value)
         || item.email.includes(debouncedSearch.value)
         || item.name.includes(debouncedSearch.value)
-        || item.subject.includes(debouncedSearch.value)
+        || item.title.includes(debouncedSearch.value)
         || item.text.includes(debouncedSearch.value)
+        || item.labels.includes(debouncedSearch.value)
     })
   }
 
@@ -55,75 +55,31 @@ const selectedBlogData = computed(() => props.blogs.find(item => item.id === sel
 
 const links: LinkProp[] = [
   {
-    title: 'Inbox',
-    label: '128',
-    icon: 'lucide:inbox',
+    title: 'All',
+    label: blog.length.toString(),
+    icon: 'lucide:files',
     variant: 'default',
   },
   {
-    title: 'Drafts',
-    label: '9',
-    icon: 'lucide:file',
+    title: 'Coding',
+    label: '83',
+    icon: 'lucide:code',
     variant: 'ghost',
   },
   {
-    title: 'Sent',
-    label: '',
-    icon: 'lucide:send',
+    title: 'Real Estate',
+    label: '83',
+    icon: 'lucide:house',
     variant: 'ghost',
   },
   {
-    title: 'Junk',
-    label: '23',
-    icon: 'lucide:archive',
-    variant: 'ghost',
-  },
-  {
-    title: 'Trash',
-    label: '',
-    icon: 'lucide:trash',
-    variant: 'ghost',
-  },
-  {
-    title: 'Archive',
-    label: '',
-    icon: 'lucide:archive',
+    title: 'Palestine',
+    label: '83',
+    icon: 'circle-flags:ps',
     variant: 'ghost',
   },
 ]
 
-const links2: LinkProp[] = [
-  {
-    title: 'Social',
-    label: '972',
-    icon: 'lucide:user-2',
-    variant: 'ghost',
-  },
-  {
-    title: 'Updates',
-    label: '342',
-    icon: 'lucide:alert-circle',
-    variant: 'ghost',
-  },
-  {
-    title: 'Forums',
-    label: '128',
-    icon: 'lucide:message-square',
-    variant: 'ghost',
-  },
-  {
-    title: 'Shopping',
-    label: '8',
-    icon: 'lucide:shopping-cart',
-    variant: 'ghost',
-  },
-  {
-    title: 'Promotions',
-    label: '21',
-    icon: 'lucide:archive',
-    variant: 'ghost',
-  },
-]
 
 function onCollapse() {
   isCollapsed.value = true
@@ -153,19 +109,12 @@ function onExpand() {
           @expand="onExpand"
           @collapse="onCollapse"
         >
-          <div :class="cn('flex h-[56px] items-center justify-center', isCollapsed ? 'h-[56px]' : 'px-2')">
-            <MailAccountSwitcher :is-collapsed="isCollapsed" :accounts="accounts" />
-          </div>
           <Separator />
           <MailNav
             :is-collapsed="isCollapsed"
             :links="links"
           />
           <Separator />
-          <MailNav
-            :is-collapsed="isCollapsed"
-            :links="links2"
-          />
         </ResizablePanel>
         <ResizableHandle id="resize-handle-1" with-handle />
         <ResizablePanel id="resize-panel-2" :default-size="defaultLayout[1]" :min-size="30">
@@ -173,11 +122,11 @@ function onExpand() {
           <Tabs v-else default-value="all">
             <div class="flex items-center px-4 py-2">
               <h1 class="text-xl font-bold">
-                Inbox
+                Blog
               </h1>
               <TabsList class="ml-auto">
                 <TabsTrigger value="all" class="text-zinc-600 dark:text-zinc-200">
-                  All mail
+                  All Posts
                 </TabsTrigger>
                 <TabsTrigger value="unread" class="text-zinc-600 dark:text-zinc-200">
                   Unread

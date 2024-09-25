@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { blogs, accounts } from '~/components/blog/data/blogs';
+import { blog, accounts } from '~/components/blog/data/blogs';
 
 const { backgroundIsWhite } = useAppConf()
 backgroundIsWhite()
@@ -10,7 +10,7 @@ onUnmounted(() => backgroundIsWhite(false))
 <template>
   <BlogLayout
     :accounts="accounts"
-    :blogs="blogs"
+    :blogs="blog"
     :nav-collapsed-size="4"
   />
 </template>

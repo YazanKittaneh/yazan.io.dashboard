@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Archive, ArchiveX, ArrowLeft, Clock, Forward, MoreVertical, Reply, ReplyAll, Trash2 } from 'lucide-vue-next'
+import { Archive, ArchiveX, ArrowLeft, Clock, Forward, MoreVertical, Reply, ReplyAll, Share, Trash2 } from 'lucide-vue-next'
 import { computed } from 'vue'
 import { addDays, addHours, format, nextSaturday } from 'date-fns'
 import type { Blog } from './data/blogs'
@@ -28,46 +28,19 @@ const today = new Date()
       <div class="flex items-center gap-2">
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail" @click="emit('close')">
+            <Button variant="ghost" size="icon" :disabled="!blog" @click="emit('close')">
               <ArrowLeft class="size-4" />
               <span class="sr-only">Back</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>Back</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <Archive class="size-4" />
-              <span class="sr-only">Archive</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Archive</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <ArchiveX class="size-4" />
-              <span class="sr-only">Move to junk</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Move to junk</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <Trash2 class="size-4" />
-              <span class="sr-only">Move to trash</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Move to trash</TooltipContent>
-        </Tooltip>
+        </Tooltip>        
         <Separator orientation="vertical" class="mx-1 h-6" />
         <Tooltip>
           <Popover>
             <PopoverTrigger as-child>
               <TooltipTrigger as-child>
-                <Button variant="ghost" size="icon" :disabled="!mail">
+                <Button variant="ghost" size="icon" :disabled="!blog">
                   <Clock class="size-4" />
                   <span class="sr-only">Snooze</span>
                 </Button>
@@ -128,36 +101,18 @@ const today = new Date()
       <div class="ml-auto flex items-center gap-2">
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <Reply class="size-4" />
-              <span class="sr-only">Reply</span>
+            <Button variant="ghost" size="icon" :disabled="!blog">
+              <Share class="size-4" />
+              <span class="sr-only">Share</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>Reply</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <ReplyAll class="size-4" />
-              <span class="sr-only">Reply all</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Reply all</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <Button variant="ghost" size="icon" :disabled="!mail">
-              <Forward class="size-4" />
-              <span class="sr-only">Forward</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Forward</TooltipContent>
         </Tooltip>
       </div>
       <Separator orientation="vertical" class="mx-2 h-6" />
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
-          <Button variant="ghost" size="icon" :disabled="!mail">
+          <Button variant="ghost" size="icon" :disabled="!blog">
             <MoreVertical class="size-4" />
             <span class="sr-only">More</span>
           </Button>
@@ -187,7 +142,7 @@ const today = new Date()
               {{ blog.title }}
             </div>
             <div class="line-clamp-1 text-xs">
-              <span class="font-medium">Author:</span> {{ blog.author }}
+              <span class="font-medium">Author:</span> {{ blog.name }}
             </div>
           </div>
         </div>
@@ -197,7 +152,7 @@ const today = new Date()
       </div>
       <Separator />
       <div class="flex-1 whitespace-pre-wrap p-4 text-sm">
-        {{ blog.content }}
+        {{ blog.text }}
       </div>
       <Separator class="mt-auto" />
       <div class="p-4">

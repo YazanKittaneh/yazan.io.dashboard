@@ -11,10 +11,10 @@ defineProps<BlogListProps>()
 const selectedBlog = defineModel<string>('selectedBlog', { required: false })
 
 function getBadgeVariantFromLabel(label: string) {
-  if (['work'].includes(label.toLowerCase()))
+  if (['coding'].includes(label.toLowerCase()))
     return 'default'
 
-  if (['personal'].includes(label.toLowerCase()))
+  if (['real estate'].includes(label.toLowerCase()))
     return 'outline'
 
   return 'secondary'
@@ -25,47 +25,44 @@ function getBadgeVariantFromLabel(label: string) {
   <ScrollArea class="h-[calc(100dvh-72px-56px-3rem-53px)] flex">
     <div class="flex flex-1 flex-col gap-2 p-4 pt-0">
       <TransitionGroup name="list" appear>
-        <button
-          v-for="item of items"
-          :key="item.id"
-          :class="cn(
-            'flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent',
-            selectedBlog === item.id && 'bg-muted',
-          )"
-          @click="selectedBlog = item.id"
-        >
-          <div class="w-full flex flex-col gap-1">
-            <div class="flex items-center">
-              <div class="flex items-center gap-2">
-                <div class="font-semibold">
-                  {{ item.name }}
+        <div v-for="item of items" :key="item.id" :class="cn(
+          'flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent',
+          selectedBlog === item.id && 'bg-muted',
+        )" @click="selectedBlog = item.id">
+            <div class="w-full flex flex-col gap-1">
+              <div class="flex items-center">
+                <div class="flex items-center gap-2">
+                  <div class="font-semibold">
+                    {{ item.name }}
+                  </div>
                 </div>
-              </div>
-              <div
-                :class="cn(
+                <div :class="cn(
                   'ml-auto text-xs',
                   selectedBlog === item.id
                     ? 'text-foreground'
                     : 'text-muted-foreground',
-                )"
-              >
-                {{ formatDistanceToNow(new Date(item.date), { addSuffix: true }) }}
+                )">
+                  {{ formatDistanceToNow(new Date(item.date), { addSuffix: true }) }}
+                </div>
+              </div>
+
+              <div class="text-xs font-medium">
+                {{ item.title }}
               </div>
             </div>
 
-            <div class="text-xs font-medium">
-              {{ item.title }}
+            <div class="line-clamp-2 text-xs text-muted-foreground">
+              {{ item.text }}
             </div>
-          </div>
-          <div class="line-clamp-2 text-xs text-muted-foreground">
-            {{ item.excerpt }}
-          </div>
-          <div class="flex items-center gap-2">
-            <Badge v-for="label of item.labels" :key="label" :variant="getBadgeVariantFromLabel(label)">
-              {{ label }}
-            </Badge>
-          </div>
-        </button>
+
+            <!-- Badges -->
+            <div class="flex items-center gap-2">
+              <Badge v-for="label of item.labels" :key="label" :variant="getBadgeVariantFromLabel(label)">
+                {{ label.toLowerCase() }}
+              </Badge>
+            </div>
+
+        </div>
       </TransitionGroup>
     </div>
   </ScrollArea>

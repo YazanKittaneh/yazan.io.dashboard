@@ -16,7 +16,7 @@ const downloadPDF = () => {
         Yazan's Dash
       </h2>
       <div class="flex items-center space-x-2">
-        <Button @click="downloadPDF">Download</Button>
+        <Button @click="downloadPDF">Download Resume</Button>
       </div>
     </div>
     <main class="flex flex-1 flex-col gap-4 md:gap-8">
