@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     'nuxt-icon',
-    "@nuxthub/core"
+    "@nuxthub/core",
+    '@nuxtjs/ngrok',
   ],
 
   css: [

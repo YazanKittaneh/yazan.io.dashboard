@@ -62,19 +62,19 @@ const links: LinkProp[] = [
   },
   {
     title: 'Coding',
-    label: '83',
+    label: blog.filter(blog => blog.labels.includes('coding')).length.toString(),
     icon: 'lucide:code',
     variant: 'ghost',
   },
   {
     title: 'Real Estate',
-    label: '83',
+    label: blog.filter(blog => blog.labels.includes('Real Estate')).length.toString(),
     icon: 'lucide:house',
     variant: 'ghost',
   },
   {
     title: 'Palestine',
-    label: '83',
+    label: blog.filter(blog => blog.labels.includes('Palestine')).length.toString(),
     icon: 'circle-flags:ps',
     variant: 'ghost',
   },
