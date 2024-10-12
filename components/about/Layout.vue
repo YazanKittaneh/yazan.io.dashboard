@@ -3,7 +3,7 @@ import { Search } from 'lucide-vue-next'
 import { ConfigProvider } from 'radix-vue'
 import { cn } from '~/lib/utils'
 import type { LinkProp } from '~/components/mail/Nav.vue'
-import type { JobType } from './data/jobs';
+import type { Job, JobType } from './data/jobs';
 
 
 const useIdFunction = () => useId()
@@ -37,7 +37,7 @@ const debouncedSearch = refDebounced(searchValue, 250)
                 </CardHeader>
                 <CardContent class="grid gap-4">
                     <div>
-                        <div v-for="(job, index) in jobs" :key="index"
+                        <div v-for="(job, index) in job" :key="index"
                             class="items-start grid grid-cols-[25px_minmax(0,1fr)] mb-4 last:mb-0 pb-4 last:pb-0">
                             <span class="flex w-2 h-2 translate-y-1 rounded-full bg-sky-500" />
                             <div class="space-y-1">

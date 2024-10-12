@@ -4,10 +4,17 @@ import { jobs, type Job } from '~/components/about/data/jobs';
 
 const { backgroundIsWhite } = useAppConf()
 backgroundIsWhite()
-
 onUnmounted(() => backgroundIsWhite(false))
 
 const typedJobs: Job[] = jobs
+
+const loadGosuImages = (): string[] => {
+  const context = useAsyncData('gosuImages', () => useStorage().getItem('public/gosu'))
+  console.log("context: ", context)
+  return Object.keys(context).map(path => path.split('/').pop() || '')
+}
+
+const gosuImages: string[] = loadGosuImages()
 
 </script>
 
@@ -19,8 +26,8 @@ const typedJobs: Job[] = jobs
         }" />
     </div>
 
-    <div class="items-start justify-center gap-6 p-8 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-3">
-        <div class="grid items-start col-span-3 gap-6 lg:col-span-1">
+    <div class="justify-center items-start gap-6 md:grid lg:grid-cols-2 xl:grid-cols-3 p-8 rounded-lg">
+        <div class="items-start gap-6 grid col-span-3 lg:col-span-1">
             <AboutHeadingCard />
 
             <Card :class="cn('', $attrs.class ?? '')">
@@ -28,19 +35,19 @@ const typedJobs: Job[] = jobs
                     <CardTitle>Timeline</CardTitle>
                     <CardDescription>Follow my journey.</CardDescription>
                 </CardHeader>
-                <CardContent class="grid gap-4">
+                <CardContent class="gap-4 grid">
                     <div>
                         <div v-for="(job, index) in typedJobs" :key="index"
                             class="items-start grid grid-cols-[25px_minmax(0,1fr)] mb-4 last:mb-0 pb-4 last:pb-0">
-                            <span class="flex w-2 h-2 translate-y-1 rounded-full bg-sky-500" />
+                            <span class="flex bg-sky-500 rounded-full w-2 h-2 translate-y-1" />
                             <div class="space-y-1">
-                                <p class="text-sm font-medium leading-none">
+                                <p class="font-medium text-sm leading-none">
                                     {{ job.company }}
                                 </p>
-                                <p class="text-sm text-muted-foreground">
+                                <p class="text-muted-foreground text-sm">
                                     {{ job.position }}d
                                 </p>
-                                <p class="text-sm text-muted-foreground">
+                                <p class="text-muted-foreground text-sm">
                                     {{ job.endDate }}
                                 </p>
                             </div>
@@ -50,22 +57,21 @@ const typedJobs: Job[] = jobs
             </Card>
         </div>
 
-        
         <!--V  Speific Projects V-->
-        <div class="grid items-end col-span-2 gap-6 lg:col-span-">
+        <div class="items-end gap-6 grid col-span-2 lg:col-span-">
             <Card :class="cn('w-[380px]', $attrs.class ?? '')">
                 <CardHeader>
                     <CardTitle>Gosu.tools</CardTitle>
                     <CardDescription>Contract - Project aquired</CardDescription>
                 </CardHeader>
-                <CardContent class="grid gap-4">
+                <CardContent class="gap-4 grid">
                     <Carousel class="relative max-w-xs w">
                         <CarouselContent>
-                            <CarouselItem v-for="(_, index) in 5" :key="index">
+                            <CarouselItem v-for="(img, index) in gosuImages" :key="index">
                                 <div class="p-1">
                                     <Card>
-                                        <CardContent class="flex items-center justify-center p-6 aspect-square">
-                                            <span class="text-4xl font-semibold">{{ index + 1 }}</span>
+                                        <CardContent class="flex justify-center items-center p-6 aspect-square">
+                                            <NuxtImg src=img></NuxtImg>
                                         </CardContent>
                                     </Card>
                                 </div>
@@ -78,25 +84,25 @@ const typedJobs: Job[] = jobs
             </Card>
         </div>
     </div>
-    <div class="items-start justify-center hidden col-span-4 p-8 rounded-lg gap-9 md:grid lg:grid-cols-1 xl:grid-cols-3">
+    <div class="justify-center items-start gap-9 hidden md:grid lg:grid-cols-1 xl:grid-cols-3 col-span-4 p-8 rounded-lg">
             <Card v-for="job in jobs" :key="job.company" class="mb-6">
                 <CardHeader>
-                    <CardTitle class="flex items-center justify-between">
+                    <CardTitle class="flex justify-between items-center">
                         <span>{{ job.position }}</span>
                         <Badge v-if="job.type" variant="secondary">{{ job.type }}</Badge>
                     </CardTitle>
                     <CardDescription class="flex items-center">
-                        <BriefcaseIcon class="w-4 h-4 mr-2" />
+                        <BriefcaseIcon class="mr-2 w-4 h-4" />
                         {{ job.company }}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div class="flex items-center mb-4 text-sm text-muted-foreground">
-                        <CalendarIcon class="w-4 h-4 mr-2" />
+                    <div class="flex items-center mb-4 text-muted-foreground text-sm">
+                        <CalendarIcon class="mr-2 w-4 h-4" />
                         {{ job.startDate }} - {{ job.endDate || 'Present' }}
                     </div>
                     <h4 class="mb-2 font-semibold">Achievements:</h4>
-                    <ul class="pl-5 mb-4 list-disc">
+                    <ul class="mb-4 pl-5 list-disc">
                         <li v-for="(achievement, index) in job.achievements" :key="index" class="mb-1">
                             {{ achievement }}
                         </li>

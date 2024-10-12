@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     "@nuxthub/core",
     '@nuxtjs/ngrok',
+    '@nuxt/image',
   ],
 
   css: [
@@ -41,4 +42,7 @@ export default defineNuxtConfig({
       './lib',
     ],
   },
+  image: {
+    inject: true
+    },
 })
