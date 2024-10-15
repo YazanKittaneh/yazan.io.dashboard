@@ -89,57 +89,57 @@ export const jobs = [
   };
   
   export const skills = {
-    languages: [
-      "JavaScript",
-      "TypeScript",
-      "Python",
-      "GOlang",
-      "Kotlin",
-      "Ruby",
-      "SQL",
-      "NoSQL",
-      "Bash/ZSH Scripting"
-    ],
-    frontend: [
-      "React.js",
-      "Angular 2+",
-      "Svelte.js",
-      "Next.js",
-      "Three.js",
-      "Highcharts.js"
-    ],
-    backend: [
-      "Node.js",
-      "Express.js",
-      "Flask",
-      "FastAPI",
-      "Django",
-      "Nest.js",
-      "Ruby on Rails",
-      "Spring Boot"
-    ],
-    databases: [
-      "PostgreSQL",
-      "MySQL",
-      "Supabase",
-      "MongoDB",
-      "Redis",
-      "Firebase",
-      "GraphQL"
-    ],
-    infrastructure: [
-      "Docker",
-      "Kubernetes",
-      "GCP",
-      "AWS",
-      "Nginx",
-      "Proxmox",
-      "Ansible"
-    ],
-    other: [
-      "Machine Learning & LLMs",
-      "On-prem (Proxmox, Nginx, Ansible, SSL, No-trust authorization)"
-    ]
+    languages: {
+    JavaScript: "JavaScript",
+    TypeScript: "TypeScript",
+    Python: "Python",
+    GOlang: "GOlang",
+    Kotlin: "Kotlin",
+    Ruby: "Ruby",
+    SQL: "SQL",
+    NoSQL: "NoSQL",
+    BashZSHScripting: "Bash/ZSH Scripting"
+  },
+  frontend: {
+    React: "React.js",
+    Angular: "Angular 2+",
+    Svelte: "Svelte.js",
+    Next: "Next.js",
+    Three: "Three.js",
+    Highcharts: "Highcharts.js"
+  },
+  backend: {
+    Node: "Node.js",
+    Express: "Express.js",
+    Flask: "Flask",
+    FastAPI: "FastAPI",
+    Django: "Django",
+    Nest: "Nest.js",
+    RubyOnRails: "Ruby on Rails",
+    SpringBoot: "Spring Boot"
+  },
+  databases: {
+    PostgreSQL: "PostgreSQL",
+    MySQL: "MySQL",
+    Supabase: "Supabase",
+    MongoDB: "MongoDB",
+    Redis: "Redis",
+    Firebase: "Firebase",
+    GraphQL: "GraphQL"
+  },
+  infrastructure: {
+    Docker: "Docker",
+    Kubernetes: "Kubernetes",
+    GCP: "GCP",
+    AWS: "AWS",
+    Nginx: "Nginx",
+    Proxmox: "Proxmox",
+    Ansible: "Ansible"
+  },
+  other: {
+    MachineLearningLLMs: "Machine Learning & LLMs",
+    OnPrem: "On-prem (Proxmox, Nginx, Ansible, SSL, No-trust authorization)"
+  }
   };
 
   export const projects = [

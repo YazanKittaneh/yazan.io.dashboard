@@ -13,7 +13,9 @@ export default defineNuxtConfig({
     '@nuxtjs/ngrok',
     '@nuxt/image',
   ],
-
+  alias:{
+    assets: "/<rootDir>/assets"
+  },
   css: [
     '@unocss/reset/tailwind.css',
   ],

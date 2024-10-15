@@ -18,27 +18,27 @@ import { jobs } from '../about/data/jobs'
   <div class="space-y-6">
     <Card v-for="job in jobs" :key="job.company" class="mb-6">
       <CardHeader>
-        <CardTitle class="flex items-center justify-between">
+        <CardTitle class="flex justify-between items-center">
           <span>{{ job.position }}</span>
           <Badge v-if="job.type" variant="secondary">{{ job.type }}</Badge>
         </CardTitle>
         <CardDescription class="flex items-center">
-          <BriefcaseIcon class="mr-2 h-4 w-4" />
+          <BriefcaseIcon class="mr-2 w-4 h-4" />
           {{ job.company }}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div class="mb-4 flex items-center text-sm text-muted-foreground">
-          <CalendarIcon class="mr-2 h-4 w-4" />
+        <div class="flex items-center mb-4 text-sm text-muted-foreground">
+          <CalendarIcon class="mr-2 w-4 h-4" />
           {{ job.startDate }} - {{ job.endDate || 'Present' }}
         </div>
-        <h4 class="font-semibold mb-2">Achievements:</h4>
-        <ul class="list-disc pl-5 mb-4">
+        <h4 class="mb-2 font-semibold">Achievements:</h4>
+        <ul class="pl-5 mb-4 list-disc">
           <li v-for="(achievement, index) in job.achievements" :key="index" class="mb-1">
             {{ achievement }}
           </li>
         </ul>
-        <h4 class="font-semibold mb-2">Technologies:</h4>
+        <h4 class="mb-2 font-semibold">Technologies:</h4>
         <div class="flex flex-wrap gap-2">
           <Badge v-for="(tech, index) in job.technologies" :key="index" variant="outline">
             {{ tech }}

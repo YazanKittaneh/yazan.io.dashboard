@@ -13,7 +13,9 @@ interface NavProps {
   links: LinkProp[]
 }
 
+
 defineProps<NavProps>()
+
 </script>
 
 <template>
@@ -23,7 +25,7 @@ defineProps<NavProps>()
   >
     <nav class="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
       <template v-for="(link, index) of links">
-        <Tooltip v-if="isCollapsed" :key="`1-${index}`" :delay-duration="0">
+        <Tooltip v-if="isCollapsed" :key="`3-${index}`" :delay-duration="0">
           <TooltipTrigger as-child>
             <a
               href="#"
@@ -38,7 +40,7 @@ defineProps<NavProps>()
               <span class="sr-only">{{ link.title }}</span>
             </a>
           </TooltipTrigger>
-          <TooltipContent side="right" class="flex items-center gap-4">
+          <TooltipContent side="right" class="flex gap-4 items-center">
             {{ link.title }}
             <span v-if="link.label" class="ml-auto text-muted-foreground">
               {{ link.label }}

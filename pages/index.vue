@@ -10,8 +10,8 @@ const downloadPDF = () => {
 </script>
 
 <template>
-  <div class="w-full flex flex-col gap-4">
-    <div class="flex flex-wrap items-center justify-between gap-2">
+  <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-wrap gap-2 justify-between items-center">
       <h2 class="text-3xl font-bold tracking-tight">
         Yazan's Dash
       </h2>
@@ -19,10 +19,10 @@ const downloadPDF = () => {
         <Button @click="downloadPDF">Download Resume</Button>
       </div>
     </div>
-    <main class="flex flex-1 flex-col gap-4 md:gap-8">
+    <main class="flex flex-col flex-1 gap-4 md:gap-8">
       <div class="grid gap-4 lg:grid-cols-4 md:grid-cols-2 md:gap-8">
         <Card>
-          <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
               Experience
             </CardTitle>
@@ -37,11 +37,11 @@ const downloadPDF = () => {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
               Subscriptions
             </CardTitle>
-            <Users class="h-4 w-4 text-muted-foreground" />
+            <Users class="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
@@ -53,11 +53,11 @@ const downloadPDF = () => {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
               Sales
             </CardTitle>
-            <CreditCard class="h-4 w-4 text-muted-foreground" />
+            <CreditCard class="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
@@ -69,11 +69,11 @@ const downloadPDF = () => {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+          <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
               Active Now
             </CardTitle>
-            <Activity class="h-4 w-4 text-muted-foreground" />
+            <Activity class="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
@@ -94,10 +94,10 @@ const downloadPDF = () => {
                 Recent transactions from your store.
               </CardDescription>
             </div>
-            <Button as-child size="sm" class="ml-auto gap-1">
+            <Button as-child size="sm" class="gap-1 ml-auto">
               <a href="#">
                 View All
-                <ArrowUpRight class="h-4 w-4" />
+                <ArrowUpRight class="w-4 h-4" />
               </a>
             </Button>
           </CardHeader>
@@ -245,93 +245,8 @@ const downloadPDF = () => {
             </Table>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Sales</CardTitle>
-          </CardHeader>
-          <CardContent class="grid gap-8">
-            <div class="flex items-center gap-4">
-              <Avatar class="hidden h-9 w-9 sm:flex">
-                <AvatarFallback>OM</AvatarFallback>
-              </Avatar>
-              <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">
-                  Olivia Martin
-                </p>
-                <p class="text-sm text-muted-foreground">
-                  olivia.martin@email.com
-                </p>
-              </div>
-              <div class="ml-auto font-medium">
-                +$1,999.00
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <Avatar class="hidden h-9 w-9 sm:flex">
-                <AvatarFallback>JL</AvatarFallback>
-              </Avatar>
-              <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">
-                  Jackson Lee
-                </p>
-                <p class="text-sm text-muted-foreground">
-                  jackson.lee@email.com
-                </p>
-              </div>
-              <div class="ml-auto font-medium">
-                +$39.00
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <Avatar class="hidden h-9 w-9 sm:flex">
-                <AvatarFallback>IN</AvatarFallback>
-              </Avatar>
-              <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">
-                  Isabella Nguyen
-                </p>
-                <p class="text-sm text-muted-foreground">
-                  isabella.nguyen@email.com
-                </p>
-              </div>
-              <div class="ml-auto font-medium">
-                +$299.00
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <Avatar class="hidden h-9 w-9 sm:flex">
-                <AvatarFallback>WK</AvatarFallback>
-              </Avatar>
-              <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">
-                  William Kim
-                </p>
-                <p class="text-sm text-muted-foreground">
-                  will@email.com
-                </p>
-              </div>
-              <div class="ml-auto font-medium">
-                +$99.00
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <Avatar class="hidden h-9 w-9 sm:flex">
-                <AvatarFallback>SD</AvatarFallback>
-              </Avatar>
-              <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">
-                  Sofia Davis
-                </p>
-                <p class="text-sm text-muted-foreground">
-                  sofia.davis@email.com
-                </p>
-              </div>
-              <div class="ml-auto font-medium">
-                +$39.00
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <AboutTimeline />
+
       </div>
     </main>
   </div>

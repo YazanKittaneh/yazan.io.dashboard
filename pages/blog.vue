@@ -3,6 +3,7 @@ import { blog, accounts } from '~/components/blog/data/blogs';
 
 const { backgroundIsWhite } = useAppConf()
 backgroundIsWhite()
+const isMobile = useIsMobile();
 
 onUnmounted(() => backgroundIsWhite(false))
 </script>
@@ -11,7 +12,8 @@ onUnmounted(() => backgroundIsWhite(false))
   <BlogLayout
     :accounts="accounts"
     :blogs="blog"
-    :nav-collapsed-size="4"
+    :nav-collapsed-size="4",
+    :default-collapsed=isMobile
   />
 </template>
 z

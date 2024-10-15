@@ -3,7 +3,12 @@ import { Search } from 'lucide-vue-next'
 import { ConfigProvider } from 'radix-vue'
 import { blog, type Blog } from './data/blogs'
 import { cn } from '~/lib/utils'
-import type { LinkProp } from '~/components/mail/Nav.vue'
+import type { LinkProp } from '~/components/blog/Nav.vue'
+
+
+const { width } = useWindowSize()
+const isMobile = useIsMobile()
+
 
 const props = withDefaults(defineProps<BlogProps>(), {
   defaultCollapsed: false,
@@ -22,9 +27,10 @@ interface BlogProps {
   defaultLayout?: number[]
   defaultCollapsed?: boolean
   navCollapsedSize: number
+  isCollapsed?: boolean
 }
 
-const isCollapsed = ref(props.defaultCollapsed)
+const isCollapsed = ref(isMobile.value || props.defaultCollapsed)
 const selectedBlog = ref<string | undefined>()
 const searchValue = ref('')
 const debouncedSearch = refDebounced(searchValue, 250)
@@ -88,32 +94,20 @@ function onCollapse() {
 function onExpand() {
   isCollapsed.value = false
 }
+
 </script>
 
 <template>
   <ConfigProvider :use-id="useIdFunction">
     <TooltipProvider :delay-duration="0">
-      <ResizablePanelGroup
-        id="resize-panel-group-1"
-        direction="horizontal"
-        class="h-full max-h-[calc(100dvh-53px-3rem)] items-stretch"
-      >
-        <ResizablePanel
-          id="resize-panel-1"
-          :default-size="defaultLayout[0]"
-          :collapsed-size="navCollapsedSize"
-          collapsible
-          :min-size="15"
-          :max-size="20"
-          :class="cn(isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out')"
-          @expand="onExpand"
-          @collapse="onCollapse"
-        >
+      <ResizablePanelGroup id="resize-panel-group-1" direction="horizontal"
+        class="h-full max-h-[calc(100dvh-53px-3rem)] items-stretch">
+        <ResizablePanel id="resize-panel-1" :default-size="defaultLayout[0]" :collapsed-size="navCollapsedSize"
+          collapsible :min-size="15" :max-size="20"
+          :class="cn(isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out')" @expand="onExpand"
+          @collapse="onCollapse">
           <Separator />
-          <MailNav
-            :is-collapsed="isCollapsed"
-            :links="links"
-          />
+          <BlogNav :is-collapsed="isCollapsed" :links="links" />
           <Separator />
         </ResizablePanel>
         <ResizableHandle id="resize-handle-1" with-handle />
@@ -135,12 +129,6 @@ function onExpand() {
             </div>
             <Separator />
             <div class="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <form>
-                <div class="relative">
-                  <Search class="absolute left-2 top-2.5 size-4 text-muted-foreground" />
-                  <Input v-model="searchValue" placeholder="Search" class="pl-8" />
-                </div>
-              </form>
             </div>
             <TabsContent value="all" class="m-0">
               <BlogList v-model:selected-blog="selectedBlog" :items="filteredBlogList" />
