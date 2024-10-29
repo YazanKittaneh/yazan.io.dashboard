@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { Activity, ArrowUpRight, CreditCard, DollarSign, Users } from 'lucide-vue-next'
 
+
 const downloadPDF = () => {
   // Replace 'path/to/your/file.pdf' with the actual path to your PDF file
   const pdfUrl = 'resume.pdf'
   window.open(pdfUrl, '_blank')
 }
+
 
 </script>
 
@@ -29,6 +31,7 @@ const downloadPDF = () => {
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
+              <pre>{{ data }}</pre>
               7 Years
             </div>
             <p class="text-xs text-muted-foreground">
