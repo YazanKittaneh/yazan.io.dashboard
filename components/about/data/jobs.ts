@@ -106,7 +106,8 @@ export const jobs = [
     Svelte: "Svelte.js",
     Next: "Next.js",
     Three: "Three.js",
-    Highcharts: "Highcharts.js"
+    Highcharts: "Highcharts.js",
+    React_Native: "React Native"
   },
   backend: {
     Node: "Node.js",

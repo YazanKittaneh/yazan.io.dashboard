@@ -38,6 +38,21 @@ export const projects: Projects = [
                 skills.databases.Redis
             ]
         }
+    },
+    {
+        key: "subletinn",
+        values: {
+            title: 'Subletinn.com',
+            description: 'Co-living Management Company',
+            images: ["subletinn/1.png", "subletinn/2.png", "subletinn/3.png", "subletinn/4.png", "subletinn/5.png"],
+            stack: [
+                skills.frontend.Next,
+                skills.frontend.React,
+                skills.frontend.React_Native,
+                skills.databases.PostgreSQL,
+                skills.other.OnPrem,
+            ]
+        }
     }
 ];
 

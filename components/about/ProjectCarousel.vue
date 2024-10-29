@@ -44,14 +44,14 @@ const debouncedSearch = refDebounced(searchValue, 250)
       </CardHeader>
       <div class="gap-6 justify-center items-center p-8 rounded-lg md:grid lg:grid-cols-1 xl:grid-cols-1">
 
-        <CardContent class="grid gap-4">
+        <CardContent class="gap-4">
           <Carousel class="max-w-xs w">
             <CarouselContent>
               <CarouselItem v-for="(img, index) in selectedProject.values.images" :key="index">
                 <div>
                   <Card>
-                    <CardContent class="flex object-fill justify-center place-items-center p-6 aspect-square">
-                      <nuxt-img class="object-fill" :src="img" alt="Gosu image" />
+                    <CardContent class="object-fill justify-center place-items-center p-6 aspect-square">
+                      <nuxt-img class="object-fill rounded-md" :src="img" alt="Yazan Kittaneh Software Dev" />
                     </CardContent>
                   </Card>
                 </div>
