@@ -32,7 +32,7 @@ const downloadPDF = () => {
           <CardContent>
             <div class="text-2xl font-bold">
               <pre>{{ data }}</pre>
-              7 Years
+              7 Years 
             </div>
             <p class="text-xs text-muted-foreground">
               +16.6667% from last year 
@@ -42,19 +42,20 @@ const downloadPDF = () => {
         <Card>
           <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
-              Subscriptions
+              Contributions
             </CardTitle>
             <Users class="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">
-              +2350
+              383
             </div>
             <p class="text-xs text-muted-foreground">
-              +180.1% from last month 
+              in 2024
             </p>
           </CardContent>
         </Card>
+        <!--
         <Card>
           <CardHeader class="flex flex-row justify-between items-center pb-2 space-y-0">
             <CardTitle class="text-sm font-medium">
@@ -87,8 +88,11 @@ const downloadPDF = () => {
             </p>
           </CardContent>
         </Card>
+        -->
       </div>
+      <!---->
       <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3 md:gap-8">
+        <!--
         <Card class="xl:col-span-2">
           <CardHeader class="flex flex-row items-center">
             <div class="grid gap-2">
@@ -248,6 +252,7 @@ const downloadPDF = () => {
             </Table>
           </CardContent>
         </Card>
+        -->
         <AboutTimeline />
 
       </div>

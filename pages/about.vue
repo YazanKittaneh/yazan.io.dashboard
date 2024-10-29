@@ -12,7 +12,7 @@ onUnmounted(() => backgroundIsWhite(false))
 
 <template>
     <div class="gap-6 justify-center items-start p-8 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-3">
-        <AboutTimeline />
+
         <ProjectCarousel selectedProject="gosu" />
         <ProjectCarousel selectedProject="subletinn" />
 
