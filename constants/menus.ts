@@ -6,11 +6,11 @@ export const navMenu: NavMenuItems = [
     icon: 'i-lucide-home',
     link: '/',
   },
-  {
-    title: 'Blog',
-    icon: 'i-lucide-mail',
-    link: '/blog',
-  },
+  // {
+  //   title: 'Blog',
+  //   icon: 'i-lucide-mail',
+  //   link: '/blog',
+  // },
   {
     title: 'About',
     icon: 'i-lucide-mail',
