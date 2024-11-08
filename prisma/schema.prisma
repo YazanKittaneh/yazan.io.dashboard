@@ -1,14 +1,313 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Receipt {
+  id                      Int            @id @default(autoincrement())
+  total_price             Float?
+  fileName                String?
+  tax_federal_amount      Float?
+  tax_state_amount        Float?
+  tax_total               Float?
+  date                    String?
+  credit_card_digits      String?
+  merchant_address        String?
+  merchant_email          String?
+  merchant_name           String?
+  merchant_phone_number   String?
+  merchant_representative String?
+  payment_type            PaymentMethod?
+  receipt_number          String?
+  refund_expiration_date  String?
+  total_tax_paid          Float?
+  transaction_type        ReceiptType?
+  back_of_receipt         Boolean?
+  tax_catagory            TaxType?
+}
+
+model address {
+  id         Int     @id(map: "addresses_pkey") @default(autoincrement())
+  text       String
+  coordinate Json
+  latitude   String?
+  longitude  String?
+}
+
+model categories {
+  id       Int        @id(map: "Category_pkey") @default(autoincrement())
+  title    String
+  isActive Boolean
+  products products[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model courierStatus {
+  id       Int        @id(map: "CourierStatus_pkey") @default(autoincrement())
+  text     String
+  couriers couriers[]
+}
+
+model couriers {
+  id            Int            @id(map: "Courier_pkey") @default(autoincrement())
+  name          String
+  surname       String
+  email         String
+  gender        String
+  gsm           String
+  createdAt     DateTime       @db.Timestamp(6)
+  accountNumber String
+  licensePlate  String
+  address       String
+  avatar        Json?
+  store_id      Int?
+  status_id     Int?
+  vehicle_id    Int?
+  courierStatus courierStatus? @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Courier_status_id_fkey")
+  stores        stores?        @relation(fields: [store_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Courier_store_id_fkey")
+  vehicle       vehicle?       @relation(fields: [vehicle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Courier_vehicle_id_fkey")
+  orders        orders[]
+  reviews       reviews[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model events {
+  date   String
+  status String
+
+  @@ignore
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model file {
+  lastModified BigInt?
+  name         String
+  percent      Int?
+  size         Int
+  status       String?
+  type         String
+  uid          String?
+  url          String
+
+  @@ignore
+}
+
+model identity {
+  id     Int    @id(map: "Identity_pkey") @default(autoincrement())
+  name   String
+  avatar String
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model orderChart {
+  count  Int
+  status String
+
+  @@ignore
+}
+
+model orderProduct {
+  order_id   Int
+  product_id Int
+  orders     orders   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "OrderProduct_order_id_fkey")
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "OrderProduct_product_id_fkey")
+
+  @@id([order_id, product_id], map: "OrderProduct_pkey")
+}
+
+model orders {
+  id                           Int            @id(map: "Order_pkey") @default(autoincrement())
+  createdAt                    DateTime       @db.Timestamp(6)
+  status                       Int?
+  address                      Json
+  store                        Int?
+  courier                      Int?
+  events                       Json?
+  orderNumber                  Int
+  amount                       Int
+  user                         Int?
+  orderProduct                 orderProduct[]
+  couriers                     couriers?      @relation(fields: [courier], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  status_orders_statusTostatus status?        @relation("orders_statusTostatus", fields: [status], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  stores                       stores?        @relation(fields: [store], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users                        users?         @relation(fields: [user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reviews                      reviews[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model ordertotalcount {
+  total          Int
+  totalDelivered Int
+
+  @@ignore
+}
+
+model products {
+  id               Int                @id(map: "Product_pkey") @default(autoincrement())
+  name             String
+  isActive         Boolean
+  description      String
+  images           Json
+  createdAt        DateTime           @db.Timestamp(6)
+  price            Int
+  category         Int?
+  stock            Int
+  orderProduct     orderProduct[]
+  categories       categories?        @relation(fields: [category], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  trendingProducts trendingProducts[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model reviews {
+  id                      Int       @id(map: "Review_pkey") @default(autoincrement())
+  order                   Int?
+  user                    Int?
+  star                    Int
+  createDate              DateTime  @db.Timestamp(6)
+  status                  String
+  comment                 String[]
+  courier                 Int?
+  couriers                couriers? @relation(fields: [courier], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  orders                  orders?   @relation(fields: [order], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_reviews_userTouser user?     @relation("reviews_userTouser", fields: [user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model salesChart {
+  date  String
+  title String
+  value Int
+
+  @@ignore
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model status {
+  id                           Int      @id(map: "OrderStatus_pkey") @default(autoincrement())
+  text                         String
+  orders_orders_statusTostatus orders[] @relation("orders_statusTostatus")
+}
+
+model stores {
+  id        Int        @id(map: "Store_pkey") @default(autoincrement())
+  gsm       String
+  email     String
+  title     String
+  isActive  Boolean
+  createdAt DateTime   @db.Timestamp(6)
+  address   Json?
+  couriers  couriers[]
+  orders    orders[]
+}
+
+model trendingProducts {
+  id         Int       @id(map: "TrendingProducts_pkey") @default(autoincrement())
+  product_id Int?
+  orderCount Int
+  products   products? @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "TrendingProducts_product_id_fkey")
+}
+
+model user {
+  id                         Int       @id(map: "User_pkey") @default(autoincrement())
+  firstName                  String
+  lastName                   String
+  fullName                   String
+  gender                     String
+  gsm                        String
+  createdAt                  DateTime  @db.Timestamp(6)
+  isActive                   Boolean
+  avatar                     Json?
+  addresses                  Json?
+  reviews_reviews_userTouser reviews[] @relation("reviews_userTouser")
+}
+
+model users {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  fullName  String
+  gender    String
+  gsm       String
+  createdAt DateTime @db.Timestamp(6)
+  isActive  Boolean
+  avatar    Json?
+  addresses Json?
+  orders    orders[]
+}
+
+model vehicle {
+  id          Int        @id(map: "Vehicle_pkey") @default(autoincrement())
+  model       String
+  vehicleType String
+  engineSize  Int
+  color       String
+  year        Int
+  couriers    couriers[]
+}
+
+model tenant {
+  id            Int       @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  moveInDate    DateTime
+  moveOutDate   DateTime
+  communityName Community
+}
+
+enum Community {
+  FRANCIS
+  ARMITAGE
+  GREENVIEW
+  IVY
+}
+
+enum PaymentMethod {
+  GIFT_CARD
+  STORE_CREDIT
+  CREDIT
+  DEBIT
+  CHECK
+  OTHER
+}
+
+enum ReceiptType {
+  PURCHASE
+  RETURN
+  REFUND
+  OTHER
+}
+
+enum TaxType {
+  WAGES
+  UTILITIES
+  PHONE
+  INTERNET
+  RENT
+  REPAIRS_MAINTENANCE
+  JANITOR
+  LABOR
+  BANK_FEES
+  LOAN_INTEREST_PAID
+  GASOLINE_EXPENSES
+  CAR_REPAIR_EXPENSES
+  OFFICE_SUPPLIES
+  EQUIPMENT
+  TOOLS
+  SUBSCRIPTIONS
+  TAXES
+  LICENSES
+  ADVERTISING
+  ACCOUNTING_FEES
+  INSURANCE
+  PROFESSIONAL_SERVICES
+  POSTAGE
+  OTHER
 }

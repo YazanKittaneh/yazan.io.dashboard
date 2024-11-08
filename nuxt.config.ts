@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxthub/core",
     '@nuxtjs/ngrok',
     '@nuxt/image',
+    '@prisma/nuxt',
   ],
   alias:{
     assets: "/<rootDir>/assets"

@@ -7,7 +7,6 @@ const { backgroundIsWhite } = useAppConf()
 backgroundIsWhite()
 onUnmounted(() => backgroundIsWhite(false))
 
-
 </script>
 
 <template>
