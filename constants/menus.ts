@@ -1,4 +1,5 @@
 import type { NavMenuItems } from '~/types/nav'
+const runtimeConfig = useRuntimeConfig()
 
 export const navMenu: NavMenuItems = [
   {
@@ -16,6 +17,7 @@ export const navMenu: NavMenuItems = [
     icon: 'i-lucide-mail',
     link: '/about',
   },
+  /*
   {
     heading: 'Components',
   },
@@ -270,7 +272,9 @@ export const navMenu: NavMenuItems = [
       },
     ],
   },
+  */
 ]
+
 
 export const navMenuBottom: NavMenuItems = [
   {
@@ -284,3 +288,5 @@ export const navMenuBottom: NavMenuItems = [
     link: '/account',
   },
 ]
+
+ 
